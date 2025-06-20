@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="solutionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="400" fill="#f8f9fa" />
+  
+  <!-- Central Platform -->
+  <rect x="300" y="150" width="200" height="100" rx="10" ry="10" fill="url(#solutionGrad)" />
+  <text x="400" y="205" font-family="Arial" font-size="20" font-weight="bold" fill="white" text-anchor="middle">Sec-LLM</text>
+  
+  <!-- Input Sources -->
+  <g>
+    <!-- SIEM -->
+    <rect x="50" y="50" width="150" height="60" rx="5" ry="5" fill="#3498db" opacity="0.8" />
+    <text x="125" y="85" font-family="Arial" font-size="16" fill="white" text-anchor="middle">SIEM Data</text>
+    <line x1="200" y1="80" x2="300" y2="150" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+    
+    <!-- EDR -->
+    <rect x="50" y="170" width="150" height="60" rx="5" ry="5" fill="#3498db" opacity="0.8" />
+    <text x="125" y="205" font-family="Arial" font-size="16" fill="white" text-anchor="middle">EDR Telemetry</text>
+    <line x1="200" y1="200" x2="300" y2="200" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+    
+    <!-- Threat Intel -->
+    <rect x="50" y="290" width="150" height="60" rx="5" ry="5" fill="#3498db" opacity="0.8" />
+    <text x="125" y="325" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Threat Intelligence</text>
+    <line x1="200" y1="320" x2="300" y2="250" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+  </g>
+  
+  <!-- Output/Integration -->
+  <g>
+    <!-- Security Ops -->
+    <rect x="600" y="50" width="150" height="60" rx="5" ry="5" fill="#2c3e50" opacity="0.8" />
+    <text x="675" y="85" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Security Operations</text>
+    <line x1="500" y1="150" x2="600" y2="80" stroke="#2c3e50" stroke-width="2" />
+    
+    <!-- CISO Dashboard -->
+    <rect x="600" y="170" width="150" height="60" rx="5" ry="5" fill="#2c3e50" opacity="0.8" />
+    <text x="675" y="205" font-family="Arial" font-size="16" fill="white" text-anchor="middle">CISO Dashboard</text>
+    <line x1="500" y1="200" x2="600" y2="200" stroke="#2c3e50" stroke-width="2" />
+    
+    <!-- Automated Response -->
+    <rect x="600" y="290" width="150" height="60" rx="5" ry="5" fill="#2c3e50" opacity="0.8" />
+    <text x="675" y="325" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Automated Response</text>
+    <line x1="500" y1="250" x2="600" y2="320" stroke="#2c3e50" stroke-width="2" />
+  </g>
+  
+  <!-- Core Features -->
+  <g>
+    <circle cx="350" cy="120" r="25" fill="#e74c3c" opacity="0.8" />
+    <text x="350" y="125" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Context</text>
+    
+    <circle cx="400" cy="120" r="25" fill="#e74c3c" opacity="0.8" />
+    <text x="400" y="125" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Learning</text>
+    
+    <circle cx="450" cy="120" r="25" fill="#e74c3c" opacity="0.8" />
+    <text x="450" y="125" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Memory</text>
+  </g>
+  
+  <!-- Data Flow Animation -->
+  <g>
+    <!-- Input Flows -->
+    <circle r="4" fill="white">
+      <animateMotion path="M125,80 L300,150" dur="2s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="4" fill="white">
+      <animateMotion path="M125,200 L300,200" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="4" fill="white">
+      <animateMotion path="M125,320 L300,250" dur="2.5s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Output Flows -->
+    <circle r="4" fill="white">
+      <animateMotion path="M500,150 L675,80" dur="2s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="4" fill="white">
+      <animateMotion path="M500,200 L675,200" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="4" fill="white">
+      <animateMotion path="M500,250 L675,320" dur="2.5s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial" font-size="24" font-weight="bold" fill="#2c3e50" text-anchor="middle">Sec-LLM Architecture</text>
+</svg>
