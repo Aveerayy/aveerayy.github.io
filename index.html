@@ -1,44 +1,708 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Loading...</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Operations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .loading-text {
-      font-size: 3rem;
-      font-weight: bold;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a23 0%, #1a1a3e 50%, #2d1b69 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 0.3;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-    }
-  </style>
+        /* Neural Network Background Animation */
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00d4ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00d4ff;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            animation: flow 3s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+
+        @keyframes flow {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '⚡';
+            font-size: 32px;
+            color: #00d4ff;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #9b59b6);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 120px 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 50%, #e74c3c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: #b8c6db;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: #00d4ff;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            animation: rotate 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #00d4ff;
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .service-card p {
+            color: #b8c6db;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .contact-section {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 25px;
+            padding: 60px 40px;
+            margin: 100px auto;
+            max-width: 700px;
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 25px;
+            padding: 2px;
+            background: linear-gradient(135deg, #00d4ff, #9b59b6, #e74c3c);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-section .subtitle {
+            text-align: center;
+            color: #b8c6db;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 10px;
+            color: #00d4ff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 18px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .contact-info p {
+            color: #b8c6db;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+            transform: scale(1.05);
+            display: inline-block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: #666666;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            margin-top: 100px;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .contact-section {
+                margin: 60px 20px;
+                padding: 40px 25px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Additional neural network styling */
+        .network-visualization {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .network-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00d4ff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #00d4ff;
+        }
+    </style>
 </head>
 <body>
-  <div class="loading-text">Loading...</div>
+    <div class="neural-bg" id="neuralBg"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">Neural Services</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Connect</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero" id="home">
+                <h1>AI Operations</h1>
+                <p class="subtitle">Harness the power of <span class="highlight">artificial intelligence</span> to transform your business operations. Our neural network architecture delivers intelligent solutions that adapt, learn, and scale with your needs.</p>
+                <a href="#contact" class="cta-button">Initialize Connection</a>
+            </section>
+
+            <section class="services-grid" id="services">
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Cognitive Processing</h3>
+                    <p>Advanced neural networks that understand and process complex business data with human-like intelligence.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔗</div>
+                    <h3>Integration</h3>
+                    <p>Seamlessly connect disparate systems through intelligent neural pathways and automated workflows.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Lightning-fast data processing and insights powered by distributed neural computing architectures.</p>
+                </div>
+
+            </section>
+
+            <section class="cta-section">
+                <a href="#contact" class="cta-button">Activate Neural Network</a>
+            </section>
+
+            <section class="contact-section" id="contact">
+                <h2>Establish Connection</h2>
+                <p class="subtitle">Ready to integrate neural intelligence into your business? Let's connect and explore the possibilities.</p>
+                
+                <div class="success-message" id="successMessage">
+                    Neural connection established! Your message has been transmitted successfully.
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Node Identifier</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Network Address</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@domain.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Organization Hub</label>
+                        <input type="text" id="company" name="company" placeholder="Your company name (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Data Transmission</label>
+                        <textarea id="message" name="message" placeholder="Describe your neural network requirements and how we can optimize your business operations..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Transmit Data</button>
+                </form>
+                
+                <div class="contact-info">
+                    <p>Direct neural link available:</p>
+                    <p><a href="mailto:akshay@veerayyagari.com">akshay@veerayyagari.com</a></p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Neural Networks Mapped to Services. Powered by advanced AI architecture.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create animated neural network background
+        function createNeuralNetwork() {
+            const neuralBg = document.getElementById('neuralBg');
+            const nodeCount = 15;
+            const nodes = [];
+
+            // Create nodes
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.className = 'node';
+                node.style.left = Math.random() * 100 + '%';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 2 + 's';
+                neuralBg.appendChild(node);
+                nodes.push(node);
+            }
+
+            // Create connections between nodes
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    if (Math.random() > 0.7) { // 30% chance of connection
+                        const connection = document.createElement('div');
+                        connection.className = 'connection';
+                        
+                        const rect1 = nodes[i].getBoundingClientRect();
+                        const rect2 = nodes[j].getBoundingClientRect();
+                        
+                        const x1 = parseFloat(nodes[i].style.left);
+                        const y1 = parseFloat(nodes[i].style.top);
+                        const x2 = parseFloat(nodes[j].style.left);
+                        const y2 = parseFloat(nodes[j].style.top);
+                        
+                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                        
+                        connection.style.width = length + 'vw';
+                        connection.style.left = x1 + '%';
+                        connection.style.top = y1 + '%';
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        connection.style.transformOrigin = '0 0';
+                        connection.style.animationDelay = Math.random() * 3 + 's';
+                        
+                        neuralBg.appendChild(connection);
+                    }
+                }
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const company = formData.get('company');
+            const message = formData.get('message');
+            
+            // Create mailto link with form data
+            const subject = encodeURIComponent('Neural Network Service Inquiry from ' + name);
+            const body = encodeURIComponent(
+                `Neural Node Identifier: ${name}\n` +
+                `Network Address: ${email}\n` +
+                `Organization Hub: ${company || 'Independent Node'}\n\n` +
+                `Data Transmission:\n${message}\n\n` +
+                `---\nTransmitted via Neural Networks Mapped to Services`
+            );
+            
+            const mailtoLink = `mailto:akshay@veerayyagari.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 6 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 6000);
+        });
+
+        // Initialize neural network background
+        window.addEventListener('load', createNeuralNetwork);
+
+        // Add interactive cursor effect
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.querySelector('.neural-cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'neural-cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 30px;
+                    height: 30px;
+                    background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%);
+                    border: 1px solid rgba(0,212,255,0.3);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const cursorElement = document.querySelector('.neural-cursor');
+            cursorElement.style.left = e.clientX - 15 + 'px';
+            cursorElement.style.top = e.clientY - 15 + 'px';
+        });
+
+        // Add hover effects for service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
+
