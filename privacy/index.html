@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy – HabiTrait</title>
+    <meta name="description" content="HabiTrait Privacy Policy. Your data stays on your device. We respect your privacy.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mint: #34C759;
+            --coral: #FF6B6B;
+            --sky: #5AC8FA;
+            --lavender: #AF52DE;
+            --gold: #FFD60A;
+            --navy: #1C1C3A;
+            --slate: #2D2D4A;
+            --cream: #FAFAF8;
+            --gradient-primary: linear-gradient(135deg, #34C759 0%, #5AC8FA 50%, #AF52DE 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--navy);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            padding: 24px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250, 250, 248, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        header .container {
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--navy);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(52, 199, 89, 0.3);
+        }
+
+        .back-link {
+            color: var(--mint);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            gap: 12px;
+        }
+
+        main {
+            padding: 140px 0 80px;
+        }
+
+        .policy-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .policy-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 56px);
+            margin-bottom: 16px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .policy-header p {
+            color: var(--slate);
+            font-size: 18px;
+        }
+
+        .policy-content {
+            background: white;
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .policy-section {
+            margin-bottom: 40px;
+        }
+
+        .policy-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .policy-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .policy-section h2 .emoji {
+            font-size: 28px;
+        }
+
+        .policy-section p {
+            color: var(--slate);
+            margin-bottom: 16px;
+        }
+
+        .policy-section ul {
+            color: var(--slate);
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .policy-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background: rgba(52, 199, 89, 0.1);
+            border-left: 4px solid var(--mint);
+            padding: 20px 24px;
+            border-radius: 0 16px 16px 0;
+            margin: 24px 0;
+        }
+
+        .highlight-box p {
+            color: var(--navy);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--slate);
+            font-size: 14px;
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--mint);
+        }
+
+        .footer-copy {
+            color: var(--slate);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .policy-content {
+                padding: 32px 24px;
+                border-radius: 24px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🌱</div>
+                HabiTrait
+            </a>
+            <a href="/" class="back-link">
+                ← Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="policy-header">
+                <h1>Privacy Policy</h1>
+                <p>Your privacy matters. Here's how we protect it.</p>
+            </div>
+
+            <div class="policy-content">
+                <div class="policy-section">
+                    <h2><span class="emoji">🔒</span> Our Promise</h2>
+                    <p>HabiTrait is built with privacy at its core. We believe your personal development journey should be exactly that—personal. Your habit data, personality insights, and progress are yours alone.</p>
+                    
+                    <div class="highlight-box">
+                        <p>🌟 <strong>The short version:</strong> Your data stays on your device. We don't collect, store, or sell your personal information. Period.</p>
+                    </div>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">📱</span> Data Storage</h2>
+                    <p>All your data is stored locally on your device using Apple's secure frameworks:</p>
+                    <ul>
+                        <li><strong>Habits and completions</strong> — Stored on-device only</li>
+                        <li><strong>Personality goals</strong> — Stored on-device only</li>
+                        <li><strong>Analytics and progress</strong> — Calculated on-device only</li>
+                        <li><strong>Settings and preferences</strong> — Stored on-device only</li>
+                    </ul>
+                    <p>We use Apple's SwiftData framework for secure, local data persistence. Your information never leaves your device unless you explicitly choose to export or share it.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">🚫</span> What We Don't Collect</h2>
+                    <p>HabiTrait does <strong>not</strong> collect:</p>
+                    <ul>
+                        <li>Personal identification information</li>
+                        <li>Email addresses or contact information</li>
+                        <li>Location data</li>
+                        <li>Usage analytics or behavioral data</li>
+                        <li>Device identifiers for tracking</li>
+                        <li>Any data transmitted to external servers</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">🔐</span> Security Features</h2>
+                    <p>We've implemented additional security measures to protect your data:</p>
+                    <ul>
+                        <li><strong>Face ID / Touch ID</strong> — Optional biometric protection for app access</li>
+                        <li><strong>On-device encryption</strong> — Your data is encrypted using iOS security standards</li>
+                        <li><strong>No cloud sync</strong> — Data remains exclusively on your device</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">📤</span> Data Export & Sharing</h2>
+                    <p>You have full control over your data:</p>
+                    <ul>
+                        <li><strong>Export</strong> — You can export your habit data at any time through the app settings</li>
+                        <li><strong>Share</strong> — You can share progress screenshots or summaries—this is always your choice</li>
+                        <li><strong>Delete</strong> — Deleting the app removes all data permanently</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">🔔</span> Notifications</h2>
+                    <p>If you enable reminders, HabiTrait uses Apple's local notification system. These notifications are processed entirely on your device and are not routed through any external servers.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">👶</span> Children's Privacy</h2>
+                    <p>HabiTrait does not knowingly collect information from children under 13. The app is designed for general audiences interested in personal development.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">🔄</span> Changes to This Policy</h2>
+                    <p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated revision date. We encourage you to review this policy periodically.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2><span class="emoji">📧</span> Contact Us</h2>
+                    <p>Questions or concerns about our privacy practices? We'd love to hear from you.</p>
+                    <p><strong>Email:</strong> <a href="mailto:akshay@veerayyagari.com" style="color: var(--mint);">akshay@veerayyagari.com</a></p>
+                </div>
+
+                <div class="last-updated">
+                    <p>Last updated: January 26, 2026</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="mailto:akshay@veerayyagari.com">Contact</a>
+            </div>
+            <div class="footer-copy">
+                © 2026 HabiTrait. Made with 💚 for intentional growth.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Operations</title>
+    <title>HabiTrait – Transform Your Habits, Transform Yourself</title>
+    <meta name="description" content="HabiTrait is a revolutionary habit tracker grounded in the Big Five personality model. Discover how your habits shape who you become.">
+    <meta name="keywords" content="habit tracker, personality, Big Five, OCEAN, self-improvement, iOS app">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --mint: #34C759;
+            --coral: #FF6B6B;
+            --sky: #5AC8FA;
+            --lavender: #AF52DE;
+            --gold: #FFD60A;
+            --navy: #1C1C3A;
+            --slate: #2D2D4A;
+            --cream: #FAFAF8;
+            --gradient-primary: linear-gradient(135deg, #34C759 0%, #5AC8FA 50%, #AF52DE 100%);
+            --gradient-warm: linear-gradient(135deg, #FF6B6B 0%, #FFD60A 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,672 +30,917 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a23 0%, #1a1a3e 50%, #2d1b69 100%);
-            color: #ffffff;
-            min-height: 100vh;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--navy);
             overflow-x: hidden;
-            position: relative;
+            line-height: 1.6;
         }
 
-        /* Neural Network Background Animation */
-        .neural-bg {
+        /* Animated Background */
+        .bg-shapes {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.3;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .node {
+        .shape {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #00d4ff;
             border-radius: 50%;
-            box-shadow: 0 0 10px #00d4ff;
-            animation: pulse 2s infinite alternate;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
         }
 
-        .connection {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
-            animation: flow 3s infinite linear;
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--mint);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.5); }
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--lavender);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: -5s;
         }
 
-        @keyframes flow {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+        .shape-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--sky);
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
+        /* Header */
         header {
-            padding: 30px 0;
+            padding: 24px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250, 250, 248, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
         }
 
         .logo {
             font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+            color: var(--navy);
         }
 
-        .logo::before {
-            content: '⚡';
-            font-size: 32px;
-            color: #00d4ff;
-            animation: rotate 4s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(52, 199, 89, 0.3);
         }
 
         nav {
             display: flex;
-            gap: 40px;
+            gap: 32px;
+            align-items: center;
         }
 
         nav a {
-            color: #ffffff;
+            color: var(--slate);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 10px 0;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00d4ff, #9b59b6);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
+            font-size: 15px;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            color: #00d4ff;
+            color: var(--mint);
         }
 
+        .nav-cta {
+            background: var(--navy);
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--mint);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 199, 89, 0.3);
+        }
+
+        /* Hero */
         .hero {
+            padding: 180px 0 120px;
             text-align: center;
-            padding: 120px 0;
-            max-width: 900px;
-            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(52, 199, 89, 0.1);
+            color: var(--mint);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(52, 199, 89, 0.2);
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 50%, #e74c3c 100%);
+            margin-bottom: 24px;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
         }
 
-        .hero .subtitle {
-            font-size: 1.4rem;
-            color: #b8c6db;
-            margin-bottom: 50px;
-            line-height: 1.6;
-            font-weight: 300;
+        .hero p {
+            font-size: 20px;
+            color: var(--slate);
+            max-width: 700px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
         }
 
-        .highlight {
-            color: #00d4ff;
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border-radius: 100px;
             font-weight: 600;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 80px 0;
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            animation: rotate 6s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: #00d4ff;
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #00d4ff;
-        }
-
-        .service-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .service-card p {
-            color: #b8c6db;
-            line-height: 1.5;
-        }
-
-        .cta-section {
-            text-align: center;
-            padding: 80px 0;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 50px;
+            font-size: 17px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
         }
 
-        .cta-button::before {
+        .btn-primary {
+            background: var(--navy);
+            color: white;
+            box-shadow: 0 8px 30px rgba(28, 28, 58, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(28, 28, 58, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--navy);
+            border: 2px solid rgba(28, 28, 58, 0.1);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--mint);
+            color: var(--mint);
+        }
+
+        /* App Preview */
+        .app-preview {
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 580px;
+            background: linear-gradient(180deg, var(--navy) 0%, var(--slate) 100%);
+            border-radius: 45px;
+            padding: 12px;
+            margin: 0 auto;
+            box-shadow: 0 50px 100px rgba(28, 28, 58, 0.3);
+            position: relative;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .phone-screen .emoji-big {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .phone-screen h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .phone-screen p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Modes Section */
+        .modes {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 52px);
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--slate);
+        }
+
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .mode-card {
+            background: white;
+            border-radius: 32px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .mode-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            left: 0;
+            right: 0;
+            height: 6px;
         }
 
-        .cta-button:hover::before {
-            left: 100%;
+        .mode-card.discover::before {
+            background: linear-gradient(90deg, var(--mint), var(--sky));
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+        .mode-card.transform::before {
+            background: linear-gradient(90deg, var(--coral), var(--gold));
         }
 
-        .contact-section {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 25px;
-            padding: 60px 40px;
-            margin: 100px auto;
-            max-width: 700px;
-            backdrop-filter: blur(15px);
+        .mode-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .mode-card.discover .mode-number {
+            background: rgba(52, 199, 89, 0.1);
+            color: var(--mint);
+        }
+
+        .mode-card.transform .mode-number {
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--coral);
+        }
+
+        .mode-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--navy);
+        }
+
+        .mode-card p {
+            font-size: 16px;
+            color: var(--slate);
+            line-height: 1.7;
+        }
+
+        /* Features */
+        .features {
+            padding: 120px 0;
+            background: var(--navy);
+            color: white;
             position: relative;
+            overflow: hidden;
         }
 
-        .contact-section::before {
+        .features::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            border-radius: 25px;
-            padding: 2px;
-            background: linear-gradient(135deg, #00d4ff, #9b59b6, #e74c3c);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            -webkit-mask-composite: xor;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        .contact-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .features .section-header h2 {
+            color: white;
         }
 
-        .contact-section .subtitle {
-            text-align: center;
-            color: #b8c6db;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
+        .features .section-header p {
+            color: rgba(255,255,255,0.7);
         }
 
-        .contact-form {
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 36px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             display: flex;
-            flex-direction: column;
-            gap: 25px;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
         }
 
-        .form-row {
+        .feature-card:nth-child(1) .feature-icon { background: rgba(52, 199, 89, 0.2); }
+        .feature-card:nth-child(2) .feature-icon { background: rgba(90, 200, 250, 0.2); }
+        .feature-card:nth-child(3) .feature-icon { background: rgba(255, 214, 10, 0.2); }
+        .feature-card:nth-child(4) .feature-icon { background: rgba(255, 107, 107, 0.2); }
+        .feature-card:nth-child(5) .feature-icon { background: rgba(175, 82, 222, 0.2); }
+        .feature-card:nth-child(6) .feature-icon { background: rgba(52, 199, 89, 0.2); }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+        }
+
+        /* Science Section */
+        .science {
+            padding: 120px 0;
+        }
+
+        .science-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 64px;
+            align-items: center;
         }
 
-        .form-group {
+        .science-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 48px);
+            margin-bottom: 24px;
+            color: var(--navy);
+        }
+
+        .science-text p {
+            font-size: 17px;
+            color: var(--slate);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .science-visual {
+            position: relative;
+        }
+
+        .traits-wheel {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .trait-bubble {
+            aspect-ratio: 1;
+            border-radius: 24px;
             display: flex;
             flex-direction: column;
-        }
-
-        .form-group label {
-            margin-bottom: 10px;
-            color: #00d4ff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 18px;
-            border: 2px solid rgba(0, 212, 255, 0.3);
-            border-radius: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            color: #ffffff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #00d4ff;
-            background: rgba(0, 212, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        .submit-button {
-            background: linear-gradient(135deg, #00d4ff 0%, #9b59b6 100%);
-            color: white;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 15px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
-        }
-
-        .contact-info {
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            margin-top: 50px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 16px;
+            transition: all 0.3s;
+            cursor: default;
         }
 
-        .contact-info p {
-            color: #b8c6db;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .contact-info a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        .trait-bubble:hover {
             transform: scale(1.05);
-            display: inline-block;
         }
 
-        footer {
-            text-align: center;
-            padding: 60px 0;
-            color: #666666;
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-            margin-top: 100px;
+        .trait-bubble:nth-child(1) { background: rgba(52, 199, 89, 0.15); color: #2a9d4e; }
+        .trait-bubble:nth-child(2) { background: rgba(90, 200, 250, 0.15); color: #3498db; }
+        .trait-bubble:nth-child(3) { background: rgba(255, 214, 10, 0.15); color: #d4a106; }
+        .trait-bubble:nth-child(4) { background: rgba(255, 107, 107, 0.15); color: #e74c3c; }
+        .trait-bubble:nth-child(5) { background: rgba(175, 82, 222, 0.15); color: #9b59b6; }
+
+        .trait-bubble .emoji {
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
-        .success-message {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            display: none;
+        .trait-bubble span {
+            font-size: 13px;
             font-weight: 600;
         }
 
-        /* Mobile responsiveness */
+        /* Perfect For */
+        .perfect-for {
+            padding: 80px 0;
+            background: linear-gradient(180deg, rgba(52, 199, 89, 0.05) 0%, rgba(175, 82, 222, 0.05) 100%);
+        }
+
+        .perfect-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 48px;
+        }
+
+        .perfect-item {
+            background: white;
+            padding: 16px 28px;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .perfect-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .cta-box {
+            background: var(--gradient-primary);
+            border-radius: 48px;
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .cta-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box p {
+            font-size: 20px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box .btn {
+            background: white;
+            color: var(--navy);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--mint);
+        }
+
+        .footer-copy {
+            color: var(--slate);
+            font-size: 14px;
+        }
+
+        /* Mobile */
         @media (max-width: 768px) {
             nav {
                 display: none;
             }
 
             .hero {
-                padding: 80px 0;
+                padding: 140px 0 80px;
             }
 
-            .contact-section {
-                margin: 60px 20px;
-                padding: 40px 25px;
-            }
-
-            .form-row {
+            .modes-grid {
                 grid-template-columns: 1fr;
             }
 
-            .services-grid {
+            .science-content {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                text-align: center;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .traits-wheel {
+                max-width: 300px;
+            }
+
+            .cta-box {
+                padding: 60px 24px;
+                border-radius: 32px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
-        /* Additional neural network styling */
-        .network-visualization {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            opacity: 0.1;
-            pointer-events: none;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .network-node {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #00d4ff;
-            border-radius: 50%;
-            box-shadow: 0 0 15px #00d4ff;
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
         }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <div class="neural-bg" id="neuralBg"></div>
-    
-    <div class="container">
-        <header>
-            <div class="logo">Neural Services</div>
-            <nav>
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Connect</a>
-            </nav>
-        </header>
-
-        <main>
-            <section class="hero" id="home">
-                <h1>AI Operations</h1>
-                <p class="subtitle">Harness the power of <span class="highlight">artificial intelligence</span> to transform your business operations. Our neural network architecture delivers intelligent solutions that adapt, learn, and scale with your needs</p>
-                <a href="#contact" class="cta-button">Initialize Connection</a>
-            </section>
-
-            <section class="services-grid" id="services">
-                <div class="service-card">
-                    <div class="service-icon">🧠</div>
-                    <h3>Cognitive Processing</h3>
-                    <p>Advanced neural networks that understand and process complex business data with human-like intelligence</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔗</div>
-                    <h3>Integration</h3>
-                    <p>Seamlessly connect disparate systems through intelligent neural pathways and automated workflows</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">⚡</div>
-                    <h3>Real-time Analytics</h3>
-                    <p>Lightning-fast data processing and insights powered by distributed neural computing architectures</p>
-                </div>
-
-            </section>
-
-            <section class="cta-section">
-                <a href="#contact" class="cta-button">Activate Neural Network..soon</a>
-            </section>
-
-            <section class="contact-section" id="contact">
-                <h2>Establish Connection</h2>
-                <p class="subtitle">Get ready to integrate neural intelligence into your business? Let's connect and explore the possibilities.</p>
-                
-    
-                
-                
-                
-                <div class="contact-info">
-                    <p>Direct neural link available:</p>
-                    <p><a href="mailto:akshay@veerayyagari.com">akshay@veerayyagari.com</a></p>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 Neural Networks Mapped to Services. Powered by advanced AI architecture.</p>
-        </footer>
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
     </div>
 
+    <header>
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🌱</div>
+                HabiTrait
+            </a>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#science">The Science</a>
+                <a href="/privacy">Privacy</a>
+                <a href="#download" class="nav-cta">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-badge">
+                    <span>🧬</span> Built on Big Five Personality Science
+                </div>
+                <h1>Your Habits Shape<br>Who You Become</h1>
+                <p>HabiTrait isn't just another checkbox app. It's a revolutionary habit tracker that reveals how your daily actions shape your personality—and helps you become who you want to be.</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        Download on App Store
+                    </a>
+                    <a href="#modes" class="btn btn-secondary">See How It Works</a>
+                </div>
+
+                <div class="app-preview">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="emoji-big">🎯</div>
+                            <h3>Track & Transform</h3>
+                            <p>Discover your personality through habits</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="modes" id="modes">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Two Powerful Ways to Grow</h2>
+                    <p>Whether you're curious about self-discovery or have specific goals, HabiTrait meets you where you are.</p>
+                </div>
+
+                <div class="modes-grid">
+                    <div class="mode-card discover">
+                        <div class="mode-number">1</div>
+                        <h3>Track & Discover 🔍</h3>
+                        <p>Start by picking habits you want to build. As you track them, HabiTrait reveals which personality traits you're naturally developing. Watch your personality profile evolve over time and discover surprising connections between what you do and who you're becoming.</p>
+                    </div>
+                    <div class="mode-card transform">
+                        <div class="mode-number">2</div>
+                        <h3>Goal-Driven Transformation ✨</h3>
+                        <p>Choose the personality traits you want to strengthen—Openness, Conscientiousness, Extraversion, Agreeableness, or Emotional Stability—and HabiTrait automatically suggests scientifically-mapped habits to help you get there. Your roadmap to becoming who you want to be.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything You Need</h2>
+                    <p>Powerful features that make self-improvement actually work.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>50+ Curated Habits</h3>
+                        <p>Browse an extensive catalog of habits, each carefully mapped to personality traits based on psychological research. From meditation to public speaking.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Personality Insights</h3>
+                        <p>Radar chart showing your five-trait profile. Track progress over 7, 30, or 90 days. See which habits contribute most to your growth.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔥</div>
+                        <h3>Streak Tracking</h3>
+                        <p>Stay motivated with streak counters that celebrate your consistency. Build momentum day by day and watch your dedication grow.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📅</div>
+                        <h3>Calendar View</h3>
+                        <p>Visualize your habit completion history, spot patterns, and celebrate progress with a beautiful monthly overview.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3>Smart Reminders</h3>
+                        <p>Customizable daily reminders help you stay on track. Never miss a habit with gentle, timely nudges.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Privacy First</h3>
+                        <p>Your data stays on your device, with optional Face ID protection. We believe self-improvement should be personal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="science" id="science">
+            <div class="container">
+                <div class="science-content">
+                    <div class="science-text">
+                        <h2>The Science Behind HabiTrait</h2>
+                        <p>The Big Five personality model (OCEAN) is the most widely accepted framework in personality psychology, backed by decades of research across cultures.</p>
+                        <p>While personality traits are relatively stable, research shows they can change through consistent behavioral patterns. HabiTrait bridges the gap between what you do and who you become.</p>
+                        <p><strong>Your habits aren't just tasks—they're building blocks of your identity.</strong></p>
+                    </div>
+                    <div class="science-visual">
+                        <div class="traits-wheel">
+                            <div class="trait-bubble">
+                                <span class="emoji">🎨</span>
+                                <span>Openness</span>
+                            </div>
+                            <div class="trait-bubble">
+                                <span class="emoji">📋</span>
+                                <span>Conscientiousness</span>
+                            </div>
+                            <div class="trait-bubble">
+                                <span class="emoji">🎉</span>
+                                <span>Extraversion</span>
+                            </div>
+                            <div class="trait-bubble">
+                                <span class="emoji">🤝</span>
+                                <span>Agreeableness</span>
+                            </div>
+                            <div class="trait-bubble">
+                                <span class="emoji">🧘</span>
+                                <span>Stability</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="perfect-for">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Perfect For</h2>
+                </div>
+                <div class="perfect-list">
+                    <div class="perfect-item">🚀 Personal development enthusiasts</div>
+                    <div class="perfect-item">🔮 Anyone seeking self-understanding</div>
+                    <div class="perfect-item">🌱 Intentional personality growth</div>
+                    <div class="perfect-item">📖 Psychology students</div>
+                    <div class="perfect-item">😤 Tired of basic habit trackers</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta" id="download">
+            <div class="container">
+                <div class="cta-box">
+                    <h2>Transform Your Habits.<br>Transform Yourself.</h2>
+                    <p>Start your journey to intentional personality growth today.</p>
+                    <a href="https://apps.apple.com/app/habitrait" class="btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        Download Free on App Store
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="mailto:akshay@veerayyagari.com">Contact Us</a>
+                </div>
+                <div class="footer-copy">
+                    © 2026 HabiTrait. Made with 💚 for intentional growth.
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Create animated neural network background
-        function createNeuralNetwork() {
-            const neuralBg = document.getElementById('neuralBg');
-            const nodeCount = 15;
-            const nodes = [];
-
-            // Create nodes
-            for (let i = 0; i < nodeCount; i++) {
-                const node = document.createElement('div');
-                node.className = 'node';
-                node.style.left = Math.random() * 100 + '%';
-                node.style.top = Math.random() * 100 + '%';
-                node.style.animationDelay = Math.random() * 2 + 's';
-                neuralBg.appendChild(node);
-                nodes.push(node);
-            }
-
-            // Create connections between nodes
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    if (Math.random() > 0.7) { // 30% chance of connection
-                        const connection = document.createElement('div');
-                        connection.className = 'connection';
-                        
-                        const rect1 = nodes[i].getBoundingClientRect();
-                        const rect2 = nodes[j].getBoundingClientRect();
-                        
-                        const x1 = parseFloat(nodes[i].style.left);
-                        const y1 = parseFloat(nodes[i].style.top);
-                        const x2 = parseFloat(nodes[j].style.left);
-                        const y2 = parseFloat(nodes[j].style.top);
-                        
-                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-                        
-                        connection.style.width = length + 'vw';
-                        connection.style.left = x1 + '%';
-                        connection.style.top = y1 + '%';
-                        connection.style.transform = `rotate(${angle}deg)`;
-                        connection.style.transformOrigin = '0 0';
-                        connection.style.animationDelay = Math.random() * 3 + 's';
-                        
-                        neuralBg.appendChild(connection);
-                    }
-                }
-            }
-        }
-
-        // Smooth scrolling for navigation links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const company = formData.get('company');
-            const message = formData.get('message');
-            
-            // Create mailto link with form data
-            const subject = encodeURIComponent('Neural Network Service Inquiry from ' + name);
-            const body = encodeURIComponent(
-                `Neural Node Identifier: ${name}\n` +
-                `Network Address: ${email}\n` +
-                `Organization Hub: ${company || 'Independent Node'}\n\n` +
-                `Data Transmission:\n${message}\n\n` +
-                `---\nTransmitted via Neural Networks Mapped to Services`
-            );
-            
-            const mailtoLink = `mailto:akshay@veerayyagari.com?subject=${subject}&body=${body}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Reset form
-            this.reset();
-            
-            // Hide success message after 6 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 6000);
-        });
-
-        // Initialize neural network background
-        window.addEventListener('load', createNeuralNetwork);
-
-        // Add interactive cursor effect
-        document.addEventListener('mousemove', function(e) {
-            const cursor = document.querySelector('.neural-cursor');
-            if (!cursor) {
-                const newCursor = document.createElement('div');
-                newCursor.className = 'neural-cursor';
-                newCursor.style.cssText = `
-                    position: fixed;
-                    width: 30px;
-                    height: 30px;
-                    background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%);
-                    border: 1px solid rgba(0,212,255,0.3);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 9999;
-                    transition: transform 0.1s ease;
-                `;
-                document.body.appendChild(newCursor);
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(250, 250, 248, 0.95)';
+            } else {
+                header.style.background = 'rgba(250, 250, 248, 0.8)';
             }
-            
-            const cursorElement = document.querySelector('.neural-cursor');
-            cursorElement.style.left = e.clientX - 15 + 'px';
-            cursorElement.style.top = e.clientY - 15 + 'px';
-        });
-
-        // Add hover effects for service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
         });
     </script>
 </body>
 </html>
-
