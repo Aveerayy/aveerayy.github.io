@@ -420,8 +420,9 @@
             <nav>
                 <a href="#platform">Platform</a>
                 <a href="#architecture">Architecture</a>
+                <a href="#reverse-flow">Reverse Flow</a>
+                <a href="#domains">Domains</a>
                 <a href="#workflow">Workflow</a>
-                <a href="/privacy">Privacy</a>
                 <a href="#contact" class="nav-cta">Request Access</a>
             </nav>
         </div>
@@ -486,6 +487,18 @@
                         <h3>Policy and runtime controls</h3>
                         <p>Enforce scoped access, PII-safe retrieval, and deterministic output guardrails with complete audit logs for governance teams.</p>
                     </div>
+                    <div class="card">
+                        <h3>Bi-directional agent operations</h3>
+                        <p>Not just agent-to-data. Data events can trigger governed outbound actions to agents and applications.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Approval-aware automation</h3>
+                        <p>Support policy loops for visibility, approval, pre-execution checks, and safe rollout automation.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Domain-ready playbooks</h3>
+                        <p>Launch with security first, then extend the same orchestration model into finance and healthcare workflows.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -516,6 +529,105 @@
                         <div class="pill"><strong>Identity + Access</strong><br>RBAC, scoped credentials, service identities</div>
                         <div class="pill"><strong>Lineage Engine</strong><br>source -> transform -> semantic -> response trace</div>
                         <div class="pill"><strong>Runtime Policies</strong><br>PII controls, budget limits, response constraints</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reverse-flow">
+            <div class="container">
+                <h2 class="section-title">Core differentiator: reverse-trigger intelligence</h2>
+                <p class="section-sub">
+                    Most agent stacks are one-way: user asks -> LLM/agent reads data -> output or action.
+                    caeesar.org adds the opposite direction: data and lineage changes can trigger governed outbound actions.
+                </p>
+                <div class="diagram-wrap">
+                    <p class="diagram-title">Conventional flow (today)</p>
+                    <div class="diagram-grid">
+                        <div class="node">
+                            <h4>User or System Prompt</h4>
+                            <p>Question or instruction sent to LLM/agent interface.</p>
+                        </div>
+                        <div class="arrow">-></div>
+                        <div class="node">
+                            <h4>Agent Reads Data</h4>
+                            <p>Tools query apps, logs, and records to produce an answer or action.</p>
+                        </div>
+                        <div class="arrow">-></div>
+                        <div class="node">
+                            <h4>Output / Task Result</h4>
+                            <p>Response returned or command executed in downstream systems.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:14px"></div>
+                <div class="diagram-wrap">
+                    <p class="diagram-title">caeesar.org reverse-trigger flow (our model)</p>
+                    <div class="diagram-grid">
+                        <div class="node">
+                            <h4>Data + Lineage Signal</h4>
+                            <p>Change detected in governed datasets, lineage edges, quality, or policy state.</p>
+                        </div>
+                        <div class="arrow">-></div>
+                        <div class="node">
+                            <h4>Decision Loop</h4>
+                            <p>Business logic evaluates risk, confidence, approvals, and execution constraints.</p>
+                        </div>
+                        <div class="arrow">-></div>
+                        <div class="node">
+                            <h4>Outbound Agent Action</h4>
+                            <p>Trigger fix/workflow in application systems with full audit and rollback controls.</p>
+                        </div>
+                    </div>
+                    <div class="sub-diagram">
+                        <div class="pill"><strong>Visibility Loop</strong><br>Detect and explain why action was triggered</div>
+                        <div class="pill"><strong>Approval Loop</strong><br>Human-in-the-loop or policy-based auto approval</div>
+                        <div class="pill"><strong>Execution Loop</strong><br>Pre-checks, safe rollout, verification, rollback</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="domains">
+            <div class="container">
+                <h2 class="section-title">Domain launch playbooks</h2>
+                <p class="section-sub">Security first, then finance and healthcare with the same governed trigger model.</p>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-num">SECURITY</span>
+                        <h4>Vulnerability auto-remediation</h4>
+                        <p>Data signal: new vulnerable package + exploit path in dependency graph.</p>
+                        <p>Action: create patch PR, run tests, request approval, deploy with audit trail.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">SECURITY</span>
+                        <h4>Identity anomaly containment</h4>
+                        <p>Data signal: unusual privilege escalation or lateral movement indicators.</p>
+                        <p>Action: trigger containment playbook, isolate token/session, open incident workflow.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">FINANCE</span>
+                        <h4>Payment risk intervention</h4>
+                        <p>Data signal: anomalous transaction pattern versus expected behavior profile.</p>
+                        <p>Action: hold payment, trigger review workflow, enrich evidence for analyst approval.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">FINANCE</span>
+                        <h4>Reconciliation break fix</h4>
+                        <p>Data signal: ledger mismatch or delayed settlement crossing tolerance limits.</p>
+                        <p>Action: trigger reconciliation agent to classify root cause and propose corrective entries.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">HEALTHCARE</span>
+                        <h4>Clinical data quality alert</h4>
+                        <p>Data signal: missing critical fields or abnormal code drift in patient records pipeline.</p>
+                        <p>Action: trigger data stewardship task, quarantine affected feed, notify operations.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">HEALTHCARE</span>
+                        <h4>Care pathway risk trigger</h4>
+                        <p>Data signal: patient timeline change indicates elevated readmission or adverse risk.</p>
+                        <p>Action: launch care-coordination workflow for human validation and rapid intervention.</p>
                     </div>
                 </div>
             </div>
@@ -563,7 +675,6 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-links">
-                    <a href="/privacy">Privacy Policy</a>
                     <a href="mailto:akshay@veerayyagari.com">Contact</a>
                 </div>
                 <div class="footer-copy">
