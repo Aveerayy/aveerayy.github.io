@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>caeesar.org - Lineage-first Data Governance for Agents</title>
-    <meta name="description" content="A lineage-first catalog for agents and LLMs. Connect once, query governed data with trust, lineage, and policy enforcement.">
-    <meta name="keywords" content="data governance, ai agents, llm, lineage, semantic layer, mcp, data catalog">
+    <title>caeesar.org | Data Governance Layer for AI Agents</title>
+    <meta name="description" content="caeesar.org is a lineage-first data governance platform connecting AI agents and LLM apps to enterprise data with policy, observability, and semantic context.">
+    <meta name="keywords" content="caeesar, data governance, mcp, ai agents, llm, lineage, semantic catalog, policy engine">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --mint: #34C759;
-            --coral: #FF6B6B;
-            --sky: #5AC8FA;
-            --lavender: #AF52DE;
-            --gold: #FFD60A;
-            --navy: #1C1C3A;
-            --slate: #2D2D4A;
-            --cream: #FAFAF8;
-            --gradient-primary: linear-gradient(135deg, #34C759 0%, #5AC8FA 50%, #AF52DE 100%);
+            --bg: #060b17;
+            --panel: #0d1628;
+            --panel-soft: #101d34;
+            --line: #22324f;
+            --text: #e8f0ff;
+            --muted: #9eb1d0;
+            --primary: #49c8ff;
+            --accent: #7f8bff;
+            --success: #3ddc91;
+            --max: 1180px;
         }
 
         * {
@@ -30,429 +31,398 @@
 
         body {
             font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--cream);
-            color: var(--navy);
-            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 80% 0%, rgba(73, 200, 255, 0.08), transparent 30%),
+                radial-gradient(circle at 0% 40%, rgba(127, 139, 255, 0.10), transparent 30%),
+                var(--bg);
+            color: var(--text);
             line-height: 1.6;
         }
 
-        .bg-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.35;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .shape-1 {
-            width: 600px;
-            height: 600px;
-            background: var(--mint);
-            top: -220px;
-            right: -220px;
-        }
-
-        .shape-2 {
-            width: 460px;
-            height: 460px;
-            background: var(--lavender);
-            bottom: -140px;
-            left: -120px;
-            animation-delay: -6s;
-        }
-
-        .shape-3 {
-            width: 380px;
-            height: 380px;
-            background: var(--sky);
-            top: 40%;
-            left: 40%;
-            animation-delay: -11s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(35px, -30px) scale(1.04); }
-            66% { transform: translate(-25px, 20px) scale(0.96); }
-        }
-
         .container {
-            max-width: 1140px;
+            max-width: var(--max);
             margin: 0 auto;
             padding: 0 24px;
-            position: relative;
-            z-index: 1;
         }
 
         header {
-            padding: 20px 0;
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(250, 250, 248, 0.82);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 20;
+            background: rgba(6, 11, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 14px;
+            padding-bottom: 14px;
         }
 
         .logo {
-            font-size: 26px;
-            font-weight: 800;
+            font-size: 23px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: var(--navy);
+            color: var(--text);
         }
 
         .logo-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: var(--gradient-primary);
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(140deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            box-shadow: 0 4px 14px rgba(90, 200, 250, 0.3);
+            color: #031022;
+            font-weight: 800;
         }
 
         nav {
             display: flex;
-            gap: 28px;
+            gap: 24px;
             align-items: center;
         }
 
         nav a {
-            color: var(--slate);
+            color: var(--muted);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 400;
             font-size: 15px;
         }
 
         nav a:hover {
-            color: var(--mint);
+            color: var(--text);
         }
 
         .nav-cta {
-            background: var(--navy);
-            color: #fff !important;
-            padding: 10px 22px;
-            border-radius: 100px;
-            font-weight: 600;
+            border: 1px solid rgba(73, 200, 255, 0.45);
+            color: var(--primary) !important;
+            padding: 8px 14px;
+            border-radius: 999px;
         }
 
         .hero {
-            padding: 170px 0 110px;
-            text-align: center;
+            padding: 86px 0 56px;
         }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(52, 199, 89, 0.1);
-            color: #1f9a42;
-            padding: 9px 18px;
-            border-radius: 100px;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .hero-main, .hero-side {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 34px;
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid rgba(73, 200, 255, 0.5);
+            color: var(--primary);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-bottom: 14px;
             font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 26px;
-            border: 1px solid rgba(52, 199, 89, 0.22);
         }
 
-        .hero h1 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(42px, 7vw, 72px);
-            line-height: 1.1;
-            margin-bottom: 20px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        h1 {
+            font-size: clamp(34px, 5vw, 58px);
+            line-height: 1.06;
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
         }
 
-        .hero p {
-            font-size: 19px;
-            color: var(--slate);
-            max-width: 780px;
-            margin: 0 auto 40px;
-            line-height: 1.75;
+        .lead {
+            color: var(--muted);
+            font-size: 18px;
+            margin-bottom: 24px;
+            max-width: 620px;
         }
 
-        .hero-buttons {
+        .hero-actions {
             display: flex;
-            gap: 14px;
-            justify-content: center;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 30px;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 16px;
             text-decoration: none;
-            transition: all 0.2s;
-            border: 0;
+            border-radius: 10px;
+            padding: 11px 16px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .btn-primary {
-            background: var(--navy);
-            color: #fff;
-            box-shadow: 0 10px 26px rgba(28, 28, 58, 0.22);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 32px rgba(28, 28, 58, 0.28);
+            background: linear-gradient(120deg, var(--primary), var(--accent));
+            color: #041021;
         }
 
         .btn-secondary {
-            background: #fff;
-            color: var(--navy);
-            border: 2px solid rgba(28, 28, 58, 0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: var(--text);
         }
 
-        .btn-secondary:hover {
-            border-color: var(--mint);
-            color: var(--mint);
+        .hero-side h3 {
+            font-size: 17px;
+            margin-bottom: 12px;
         }
 
-        .architecture-preview {
-            margin-top: 72px;
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 28px;
-            padding: 26px;
-            box-shadow: 0 24px 54px rgba(0,0,0,0.08);
-            text-align: left;
-        }
-
-        .architecture-grid {
+        .kpis {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 14px;
         }
 
-        .arch-box {
-            border-radius: 18px;
-            padding: 18px;
-            font-size: 14px;
-            border: 1px solid rgba(0,0,0,0.06);
-            background: #fefefe;
+        .kpi {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px;
         }
 
-        .arch-box h4 {
-            font-size: 16px;
-            margin-bottom: 6px;
+        .kpi strong {
+            display: block;
+            font-size: 22px;
         }
 
-        .section {
-            padding: 112px 0;
+        .kpi span {
+            color: var(--muted);
+            font-size: 12px;
         }
 
-        .section-header {
-            text-align: center;
+        section {
+            padding: 62px 0;
+        }
+
+        .section-title {
+            font-size: clamp(30px, 4vw, 44px);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            margin-bottom: 30px;
             max-width: 760px;
-            margin: 0 auto 56px;
         }
 
-        .section-header h2 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(34px, 5vw, 50px);
-            margin-bottom: 16px;
-        }
-
-        .section-header p {
-            font-size: 18px;
-            color: var(--slate);
-        }
-
-        .cards-grid {
+        .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 20px;
         }
 
         .card {
-            background: #fff;
-            border-radius: 24px;
-            border: 1px solid rgba(0,0,0,0.05);
-            padding: 28px;
-            transition: all 0.25s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 34px rgba(0,0,0,0.1);
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 20px;
         }
 
         .card h3 {
-            font-size: 21px;
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin-bottom: 9px;
         }
 
         .card p {
-            color: var(--slate);
+            color: var(--muted);
             font-size: 15px;
         }
 
-        .dark {
-            background: var(--navy);
-            color: #fff;
-            position: relative;
-            overflow: hidden;
+        .diagram-wrap {
+            background: linear-gradient(180deg, #0a1324, #0c182d);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 22px;
         }
 
-        .dark .section-header p {
-            color: rgba(255,255,255,0.75);
+        .diagram-title {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 14px;
+            font-family: "JetBrains Mono", monospace;
         }
 
-        .dark .card {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.14);
-        }
-
-        .dark .card p {
-            color: rgba(255,255,255,0.75);
-        }
-
-        .timeline {
-            max-width: 880px;
-            margin: 0 auto;
+        .diagram-grid {
             display: grid;
-            gap: 14px;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 18px;
         }
 
-        .timeline-item {
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 18px;
-            padding: 18px 20px;
+        .node {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px;
+            min-height: 92px;
+            background: var(--panel);
         }
 
-        .timeline-item h4 {
-            font-size: 17px;
+        .node h4 {
+            font-size: 15px;
             margin-bottom: 6px;
         }
 
-        .timeline-item p {
-            color: var(--slate);
-            font-size: 15px;
+        .node p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .arrow {
+            color: var(--primary);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 24px;
+        }
+
+        .sub-diagram {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .pill {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #0b1629;
+            padding: 11px 12px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .pill strong {
+            color: var(--text);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .step {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--panel-soft);
+            padding: 16px;
+        }
+
+        .step-num {
+            display: inline-block;
+            font-family: "JetBrains Mono", monospace;
+            color: var(--success);
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .step h4 {
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .step p {
+            color: var(--muted);
+            font-size: 14px;
         }
 
         .cta {
-            padding: 105px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-top: 30px;
             text-align: center;
         }
 
-        .cta-box {
-            background: var(--gradient-primary);
-            border-radius: 40px;
-            padding: 72px 34px;
+        .cta h2 {
+            font-size: clamp(30px, 4.5vw, 46px);
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
         }
 
-        .cta-box h2 {
-            color: #fff;
-            font-family: "Playfair Display", serif;
-            font-size: clamp(34px, 5vw, 52px);
+        .cta p {
+            color: var(--muted);
             margin-bottom: 16px;
         }
 
-        .cta-box p {
-            color: rgba(255,255,255,0.92);
-            margin-bottom: 30px;
-            font-size: 19px;
-        }
-
-        .cta-box .btn {
-            background: #fff;
-            color: var(--navy);
-        }
-
         footer {
-            padding: 52px 0;
-            border-top: 1px solid rgba(0,0,0,0.06);
+            padding: 30px 0 46px;
         }
 
         .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .footer-links {
             display: flex;
-            gap: 28px;
+            gap: 18px;
         }
 
         .footer-links a {
-            color: var(--slate);
+            color: var(--muted);
             text-decoration: none;
-            font-size: 15px;
-        }
-
-        .footer-links a:hover {
-            color: var(--mint);
-        }
-
-        .footer-copy {
-            color: var(--slate);
             font-size: 14px;
         }
 
-        @media (max-width: 820px) {
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-copy {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .hero-grid { grid-template-columns: 1fr; }
+            .diagram-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .arrow {
+                transform: rotate(90deg);
+                justify-self: center;
+            }
+            .sub-diagram, .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
             nav { display: none; }
-            .hero { padding: 140px 0 86px; }
-            .architecture-grid { grid-template-columns: 1fr; }
-            .cta-box { border-radius: 28px; padding: 54px 22px; }
-            .footer-content { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
-
     <header>
         <div class="container">
             <a href="/" class="logo">
-                <div class="logo-icon">🧭</div>
+                <div class="logo-icon">C</div>
                 caeesar.org
             </a>
             <nav>
                 <a href="#platform">Platform</a>
-                <a href="#why-lineage">Why Lineage First</a>
-                <a href="#roadmap">Roadmap</a>
+                <a href="#architecture">Architecture</a>
+                <a href="#workflow">Workflow</a>
                 <a href="/privacy">Privacy</a>
-                <a href="#contact" class="nav-cta">Talk to us</a>
+                <a href="#contact" class="nav-cta">Request Access</a>
             </nav>
         </div>
     </header>
@@ -460,121 +430,121 @@
     <main>
         <section class="hero">
             <div class="container">
-                <div class="hero-badge">
-                    <span>🔗</span> One connection. Governed data for every agent.
-                </div>
-                <h1>A lineage-first catalog<br>that agents query</h1>
-                <p>
-                    We sit between your users, LLM applications, MCP clients, and enterprise data systems.
-                    Agents do not guess against raw data. They query a governed, lineage-aware catalog with policies,
-                    semantic definitions, and full audit trails built in.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#platform" class="btn btn-primary">Explore Platform</a>
-                    <a href="#roadmap" class="btn btn-secondary">View Build Plan</a>
-                </div>
-
-                <div class="architecture-preview">
-                    <div class="architecture-grid">
-                        <div class="arch-box">
-                            <h4>Agent Access Layer</h4>
-                            <p>MCP-compatible gateway plus direct SDK/API mode for one-time integration.</p>
+                <div class="hero-grid">
+                    <div class="hero-main">
+                        <span class="badge">LINEAGE-FIRST DATA GOVERNANCE</span>
+                        <h1>The control layer between agents and enterprise data</h1>
+                        <p class="lead">
+                            caeesar.org gives AI teams one policy-driven integration point for MCP tools, direct APIs,
+                            ETL metadata, semantic definitions, and auditable lineage. Build agentic workflows without
+                            exposing raw data surfaces.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#architecture" class="btn btn-primary">View Architecture</a>
+                            <a href="#contact" class="btn btn-secondary">Book a walkthrough</a>
                         </div>
-                        <div class="arch-box">
-                            <h4>Lineage + Semantic Catalog</h4>
-                            <p>Business definitions, ownership, and end-to-end lineage from source to response.</p>
-                        </div>
-                        <div class="arch-box">
-                            <h4>Policy + Observability</h4>
-                            <p>RBAC, masking, row filters, usage logs, and traceability for every data decision.</p>
+                    </div>
+                    <div class="hero-side">
+                        <h3>Platform outcomes</h3>
+                        <div class="kpis">
+                            <div class="kpi">
+                                <strong>1x</strong>
+                                <span>Integration surface for tools and data</span>
+                            </div>
+                            <div class="kpi">
+                                <strong>100%</strong>
+                                <span>Request-level data lineage traceability</span>
+                            </div>
+                            <div class="kpi">
+                                <strong>Policy</strong>
+                                <span>RBAC, masking, scopes, access controls</span>
+                            </div>
+                            <div class="kpi">
+                                <strong>Dual mode</strong>
+                                <span>MCP gateway and direct service API</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="platform">
+        <section id="platform">
             <div class="container">
-                <div class="section-header">
-                    <h2>The platform service</h2>
-                    <p>
-                        Designed for teams building AI products that must connect to real data safely and repeatedly,
-                        without rewriting access logic for every model, agent framework, or tool.
-                    </p>
-                </div>
-                <div class="cards-grid">
+                <h2 class="section-title">A professional data governance stack for AI products</h2>
+                <p class="section-sub">Built for teams shipping LLM features into production, where trust, compliance, and operational visibility are non-negotiable.</p>
+                <div class="grid-3">
                     <div class="card">
-                        <h3>Catalog-first query flow</h3>
-                        <p>Agents ask the catalog, not raw stores. The catalog resolves trusted entities, metrics, and joins.</p>
+                        <h3>Catalog-first query model</h3>
+                        <p>Agents query governed entities, not unbounded schemas. Each request is resolved through approved metrics, dimensions, and relationships.</p>
                     </div>
                     <div class="card">
-                        <h3>ETL and pipeline awareness</h3>
-                        <p>Ingest pipeline metadata from dbt, orchestration, and warehouse jobs to keep lineage live.</p>
+                        <h3>Live lineage graph</h3>
+                        <p>Capture lineage across ETL runs, transformations, and serving layers so every agent output is traceable back to source systems.</p>
                     </div>
                     <div class="card">
-                        <h3>MCP + direct mode</h3>
-                        <p>Use MCP for interoperable tool discovery or connect directly with service credentials and scopes.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Governed execution</h3>
-                        <p>Every query is policy-checked before execution, with deterministic controls on what can be returned.</p>
+                        <h3>Policy and runtime controls</h3>
+                        <p>Enforce scoped access, PII-safe retrieval, and deterministic output guardrails with complete audit logs for governance teams.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section dark" id="why-lineage">
+        <section id="architecture">
             <div class="container">
-                <div class="section-header">
-                    <h2>Why lineage first</h2>
-                    <p>
-                        Most AI data layers stop at connectors. We start with provenance and trust so every answer can be explained,
-                        audited, and improved over time.
-                    </p>
-                </div>
-                <div class="cards-grid">
-                    <div class="card">
-                        <h3>Trustable answers</h3>
-                        <p>Each result links back to source assets, transformations, and owners, reducing hallucinated data paths.</p>
+                <h2 class="section-title">Reference architecture</h2>
+                <p class="section-sub">A layered model inspired by production AI gateways, adapted for data governance and lineage intelligence.</p>
+                <div class="diagram-wrap">
+                    <p class="diagram-title">[Users / Agents] -> [caeesar.org Control Plane] -> [Governed Data Systems]</p>
+                    <div class="diagram-grid">
+                        <div class="node">
+                            <h4>AI Clients</h4>
+                            <p>LLM apps, copilots, IDE agents, orchestrators, internal tools.</p>
+                        </div>
+                        <div class="arrow">-></div>
+                        <div class="node">
+                            <h4>Control Plane</h4>
+                            <p>MCP gateway, direct API, policy engine, semantic router, observability.</p>
+                        </div>
+                        <div class="arrow">-></div>
+                        <div class="node">
+                            <h4>Data Plane</h4>
+                            <p>Warehouses, lakes, vector stores, operational systems, pipeline metadata.</p>
+                        </div>
                     </div>
-                    <div class="card">
-                        <h3>Impact visibility</h3>
-                        <p>When schemas or models change, see which agents, prompts, and workflows will be affected.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Compliance ready</h3>
-                        <p>Lineage plus access logs creates an auditable trail for governance, security, and policy teams.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Faster iteration</h3>
-                        <p>Teams can improve prompts and tooling with a shared semantic map instead of ad-hoc data assumptions.</p>
+                    <div class="sub-diagram">
+                        <div class="pill"><strong>Identity + Access</strong><br>RBAC, scoped credentials, service identities</div>
+                        <div class="pill"><strong>Lineage Engine</strong><br>source -> transform -> semantic -> response trace</div>
+                        <div class="pill"><strong>Runtime Policies</strong><br>PII controls, budget limits, response constraints</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="roadmap">
+        <section id="workflow">
             <div class="container">
-                <div class="section-header">
-                    <h2>Initial roadmap</h2>
-                    <p>A practical path from pilot to production for a service-first data governance layer.</p>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>Phase 1: Connect and catalog</h4>
-                        <p>Onboard core data stores and ETL metadata. Build entity graph, ownership model, and schema registry.</p>
+                <h2 class="section-title">Operational workflow</h2>
+                <p class="section-sub">How production teams use caeesar.org from ingestion to governed agent execution.</p>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-num">01</span>
+                        <h4>Connect systems</h4>
+                        <p>Register warehouses, lakehouses, operational APIs, and pipeline metadata feeds.</p>
                     </div>
-                    <div class="timeline-item">
-                        <h4>Phase 2: Query and govern</h4>
-                        <p>Launch semantic query API, policy engine, and full observability dashboards for agent interactions.</p>
+                    <div class="step">
+                        <span class="step-num">02</span>
+                        <h4>Model and map</h4>
+                        <p>Create semantic entities, approved joins, ownership metadata, and policy boundaries.</p>
                     </div>
-                    <div class="timeline-item">
-                        <h4>Phase 3: Agent interoperability</h4>
-                        <p>Release MCP gateway profile and SDK adapters so enterprise teams can integrate once and scale safely.</p>
+                    <div class="step">
+                        <span class="step-num">03</span>
+                        <h4>Expose interfaces</h4>
+                        <p>Publish MCP tool surface and direct API endpoints for application and agent consumers.</p>
                     </div>
-                    <div class="timeline-item">
-                        <h4>Phase 4: Optimization loops</h4>
-                        <p>Add cost controls, retrieval feedback loops, and automated quality checks tied directly to lineage graphs.</p>
+                    <div class="step">
+                        <span class="step-num">04</span>
+                        <h4>Monitor and optimize</h4>
+                        <p>Trace all requests, monitor quality and cost, and improve policies with lineage-aware feedback loops.</p>
                     </div>
                 </div>
             </div>
@@ -582,11 +552,9 @@
 
         <section class="cta" id="contact">
             <div class="container">
-                <div class="cta-box">
-                    <h2>Build reliable AI on governed data.</h2>
-                    <p>We are designing the control plane between users, agents, and enterprise data systems.</p>
-                    <a href="mailto:akshay@veerayyagari.com?subject=Lineage-first%20catalog%20for%20agents" class="btn">Request early access</a>
-                </div>
+                <h2>Governed data access for every agent in your stack</h2>
+                <p>Use caeesar.org to standardize how LLM applications discover, access, and reason over enterprise data safely.</p>
+                <a href="mailto:akshay@veerayyagari.com?subject=caeesar.org%20Platform%20Inquiry" class="btn btn-primary">Request early access</a>
             </div>
         </section>
     </main>
@@ -599,31 +567,10 @@
                     <a href="mailto:akshay@veerayyagari.com">Contact</a>
                 </div>
                 <div class="footer-copy">
-                    © 2026 caeesar.org.
+                    © 2026 caeesar.org. Built for enterprise AI governance.
                 </div>
             </div>
         </div>
     </footer>
-
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-            anchor.addEventListener("click", function (event) {
-                event.preventDefault();
-                var target = document.querySelector(this.getAttribute("href"));
-                if (target) {
-                    target.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-            });
-        });
-
-        window.addEventListener("scroll", function () {
-            var header = document.querySelector("header");
-            if (window.scrollY > 50) {
-                header.style.background = "rgba(250, 250, 248, 0.96)";
-            } else {
-                header.style.background = "rgba(250, 250, 248, 0.82)";
-            }
-        });
-    </script>
 </body>
 </html>
